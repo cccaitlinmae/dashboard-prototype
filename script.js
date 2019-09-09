@@ -8,26 +8,31 @@ $.ajax({
     var $div = $('.main-overview').addClass('');
   
     rows.forEach(function(row) {
-    var trend = row['gsx$trendtitle']['$t']; // row.value
+    var trend = row['gsx$trendtitle']['$t']; 
     var imgurl = row['gsx$imageurl']['$t'];
-    var description = row['gsx$description']['$t'];
-      $div.append('<div class="flip">'+ '<div class="front">'+'<div class="imagecard">' + '<img src ="' + imgurl + '"class="gallery__img">'
-                  + '' + '<div class="titlecard">' + trend + '</div></div></div>' + '	<div class="back">' + '<h3>' + description + '</h3>' + '</div></div>')
-  });
+      
+      var $card = $('<div class="imagecard">' + '<img src ="' + imgurl + '"class="gallery__img">'
+                  + '' + '<div class="titlecard">' + trend + '</div></div></div>')
+      $div.append($card) 
+      
+      $('.imagecard').hover(function(){
+      $(this).addClass('animated pulse')
+      } ,function(){
+      $(this).removeClass('animated pulse');
+});
+      
+      $('.main-overview').addClass('animated').addClass('slideInUp')
+      $('.logo').addClass('animated').addClass('fadeIn').addClass('delay-1s')
+      $('.footer__copyright').addClass('animated').addClass('fadeIn').addClass('delay-1s')
+      $('#day').addClass('animated').addClass('lightSpeedIn').addClass('delay-1s')
+    });
+    
+  //var $cards =  $('.imagecard').addClass('');
+   // $($cards[0]).addClass('animated').addClass('bounceIn').on('animationend', function() {
+   //  $($cards[1]).addClass('animated').addClass('bounceIn').addClass
+   // });
+  //  console.log($cards[0])
   }
 });
 
-$(function(){
-
-    $(".flip").flip({
-        axis: "x", // y or x
-        reverse: true, // true and false
-        trigger: "hover", // click, hover or manual
-        speed: 500
-    });
-
-    setTimeout(function() {
-        $('.flip').flip(true);
-    },3000);
-});
 

@@ -8,38 +8,14 @@
 		<link rel="stylesheet" href="style.css"/>
 		<title>Maxicare - Dashboard</title>
     
-    <style>
-      .flip {
-			display: grid;
-		  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
-		  grid-auto-rows: 200px;
-		  grid-auto-columns: 200px;
-
-		}
-.flip .front {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  z-index:1;
-}
-
-.flip .back {
-  background-color: #D48106;
-  display: flex;
-  position:absolute;
-  font-size: 13px;
-  font-weight: lighter;
-  text-align:center;
-  align-items: center;
-  justify-content: center;
-}
-    
-    
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 	</head>
 
-	<body>
-	<div id="grid-container">
+	<!--<body onload="init();">
+    <canvas id="demoCanvas" width="500" height="200"></canvas>-->
+  <body>
+
+	  <div id="grid-container">
 
   <header class="header">
     <div class="logo">
@@ -53,6 +29,7 @@
     <div class="main-overview">
     </div>
   </main>
+    
 
   <footer class="footer">
     <div class="footer__copyright">&copy; 2019 powered by DigitX</div>
@@ -60,8 +37,28 @@
 </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-Flip/1.1.2/jquery.flip.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-Flip/1.1.2/jquery.flip.min.js"></script>-->
+    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
     <script src="script.js"></script>
     <script src="date.js"></script>
+    <script>
+      function init() {
+        var stage = new createjs.Stage("demoCanvas");
+        var circle = new createjs.Shape();
+        circle.graphics.beginFill("Crimson").drawCircle(0, 0, 50);
+        circle.x = 100;
+        circle.y = 100;
+        stage.addChild(circle);
+        createjs.Tween.get(circle, {loop: true})
+          .to({x: 400}, 1000, createjs.Ease.getPowInOut(4))
+          .to({alpha: 0, y: 75}, 500, createjs.Ease.getPowInOut(2))
+          .to({alpha: 0, y: 125}, 100)
+          .to({alpha: 1, y: 100}, 500, createjs.Ease.getPowInOut(2))
+          .to({x: 100}, 800, createjs.Ease.getPowInOut(2));
+        createjs.Ticker.setFPS(60);
+        createjs.Ticker.addEventListener("tick", stage);
+      }
+    </script>
 	</body>
 </html>
